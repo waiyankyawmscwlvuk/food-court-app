@@ -21,3 +21,8 @@ assignees: ''
  When [certain action is taken]
  Then [the outcome of action is observed]
  ```
+### Test Cases
+| Test Case | Expected Result | 
+|---|---|
+| Cell A1 | Cell A2 | 
+| Cell B1 | Cell B2 |
