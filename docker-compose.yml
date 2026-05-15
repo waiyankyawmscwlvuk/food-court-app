@@ -61,6 +61,8 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+    volumes:
+      - media_files:/app/media   # shared with backend so nginx serves QR codes & uploads directly
     networks:
       - internal
     depends_on:

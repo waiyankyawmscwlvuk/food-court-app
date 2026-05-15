@@ -27,3 +27,5 @@ urlpatterns = [
     path('api/orders/', include('foodcourt.orders.urls')),
     path('api/transactions/', include('foodcourt.transactions.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Note: static() is only active when DEBUG=True (local dev).
+# In production, nginx serves /media/ directly from the shared media_files volume.
