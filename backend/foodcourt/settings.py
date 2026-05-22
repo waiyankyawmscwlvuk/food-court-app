@@ -112,6 +112,18 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
+# ── Reverse-proxy / HTTPS trust ───────────────────────────────────────────────
+# Tell Django to trust the X-Forwarded-Proto header set by the host nginx.
+# This makes request.build_absolute_uri() return https:// URLs (e.g. QR codes)
+# and satisfies Django's CSRF checks when accessed over HTTPS.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Required for Django admin + CSRF when served over HTTPS.
+# Set to your domain(s) in backend/.env, e.g. https://yourdomain.com
+_csrf_origins = config('CSRF_TRUSTED_ORIGINS', default='')
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in _csrf_origins.split(',') if o.strip()]
+
+# ── CORS ──────────────────────────────────────────────────────────────────────
 # In production with the nginx proxy, React and Django share the same origin,
 # so CORS only matters for local dev. Add your production URL here if needed.
 _cors_origins = config(
